@@ -2,6 +2,7 @@ package com.example.TestLogin.service;
 
 import com.example.TestLogin.database.UserRepository;
 import com.example.TestLogin.exceptions.BadRequestException;
+import com.example.TestLogin.model.User;
 import com.example.TestLogin.request.RegisterRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -25,6 +26,12 @@ public class RegisterService {
             throw new BadRequestException("400", "Username is already present in database.");
         }
         String password = passwordEncoder.encode(request.getPassword());
+
+        User user = new User();
+        user.setUsername(request.getUsername());
+        user.setPassword(request.getPassword());
+
+        userRepository.save(user);
         return "";
     }
 }
