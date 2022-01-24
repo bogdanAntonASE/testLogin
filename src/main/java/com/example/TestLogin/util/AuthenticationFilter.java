@@ -2,7 +2,6 @@ package com.example.TestLogin.util;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnResource;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -20,7 +19,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.stream.Collectors;
 
-@ConditionalOnResource(resources = "application.properties")
+
 public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private final AuthenticationManager authenticationManager;
     private final String secret = "ssbfkdsbkfdbmdsbmsdbpdssbfkdsbkfdbmdsbmsdbpdssbfkdsbkfdbmdsbmsdbpdssbfkdsbkfdbmdsbmsdbpd24324ssbfkdsbkfdbmdsbmsdbpdssbfkdsbkfdbmdsbmsdbpd32423";
