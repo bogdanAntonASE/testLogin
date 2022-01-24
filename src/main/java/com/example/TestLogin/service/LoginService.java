@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class LoginService {
-    public void login(String token, LoginRequest request) {
+    public void login(LoginRequest request) {
 
     }
 }

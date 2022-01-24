@@ -1,18 +1,23 @@
 package com.example.TestLogin.service;
 
+import com.example.TestLogin.database.RoleRepository;
 import com.example.TestLogin.database.UserRepository;
 import com.example.TestLogin.exceptions.BadRequestException;
+import com.example.TestLogin.model.Role;
 import com.example.TestLogin.model.User;
 import com.example.TestLogin.request.RegisterRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class RegisterService {
 
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
     private final BCryptPasswordEncoder passwordEncoder;
 
     public String register(RegisterRequest request) {
@@ -29,8 +34,11 @@ public class RegisterService {
 
         User user = new User();
         user.setUsername(request.getUsername());
-        user.setPassword(request.getPassword());
+        user.setPassword(password);
+        Role role = new Role(null, request.getRole());
+        roleRepository.save(role);
 
+        user.getRoles().add(role);
         userRepository.save(user);
         return "";
     }
