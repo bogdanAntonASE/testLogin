@@ -4,6 +4,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.example.TestLogin.exceptions.BadRequestException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -48,7 +49,7 @@ public class AuthorizationFilter extends OncePerRequestFilter {
                 filterChain.doFilter(request, response);
             }
             catch (Exception ex) {
-                ex.printStackTrace();
+                throw new BadRequestException("400", ex.getMessage());
             }
         }
         else {
